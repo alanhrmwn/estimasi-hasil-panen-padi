@@ -1,7 +1,7 @@
 # Laporan Proyek Machine Learning
-### Nama :
-### Nim :
-### Kelas :
+### Nama : Alan Hermawan
+### Nim : 211351010
+### Kelas : Malam B
 
 ## Domain Proyek
 

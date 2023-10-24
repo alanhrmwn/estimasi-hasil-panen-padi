@@ -5,91 +5,83 @@
 
 ## Domain Proyek
 
-Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-  
-  Format Referensi: [Judul Referensi](https://scholar.google.com/) 
+Nasi yang menjadi makanan utama di Indonesia menjadi alasan terpenting dalam produksi padi di Indonesia. Dengan adanya sistem yang membantu para petani dalam memprediksi hasil panen yang akan mereka dapatkan dapat membantu petani dalam memprediksi kapan mereka akan mendapatkan hasil panen yang mereka inginkan.
 
 ## Business Understanding
 
-Pada bagian ini, kamu perlu menjelaskan proses klarifikasi masalah.
+Model ini dibuat untuk mendapatkan estimasi hasil produksi/panen padi di sumatera dalam satuan ton dengan inputan :
+Luas tanah pertanian (Hektar), Jumlah rata-rata curah hujan dalam setahun (milimeter), Tingkat kelembaban rata-rata dalam setahun (persentase), Derajat suhu rata-rata dalam setahun (celsius). Diharapkan model ini akan membantu petani padi sumatera untuk mengetahui estimasi hasil panen padi.
 
 Bagian laporan ini mencakup:
 
 ### Problem Statements
 
 Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Petani yang mengalami gagal panen dikarenakan pengaruh cuaca
+- Petani yang tidak mengetahui saat kondisi cuara seperti apa mereka akan mendapatkan hasil panen yang mereka inginkan
+- Petani yang tidak memiliki estimasi berapa banyak hasil panen yang akan mereka dapatkan
 
 ### Goals
 
 Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
-
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
-
+- Dapat membantu petani dalam mendapatkan estimasi jumlah panen yang mereka dapatkan
+- Petani mengetahui cuaca seperti apa yang baik untuk mereka menanam padi
+- Mengurangi gagal panen petani
+- 
     ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
-
+    - pembuatan sistem estimasi hasil panen yang dapat digunakan oleh petani agar mengurangi gagal panen atau hasil panen yang tidak sesuai dengan keinginan mereka
+    - sistem yang dibuat menggunakan motode estimasi dengan algoritma regresi linear dengan akurasi minimal 75%
+  
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. dataset wajib menggunakan [kaggle](https://www.kaggle.com/) dan **atribut yang digunakan minimal 8 atribut**. Sertakan juga sumber atau tautan untuk mengunduh dataset.<br> 
+Dataset yang dipakai diambil dari kaggle yang berisi 224 baris dan 5 kolom mencakup data produksi tahunan dan luas panen padi dari 1993 hingga 2020. Selain itu terdapat data perubahan cuaca dari BMKG, termasuk curah hujan harian, kelembapan, dan suhu rata-rata.
 
-Contoh: [Heart Failure Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction).
+Dataset: [Dataset Tanaman Padi Sumatera, Indonesia](https://www.kaggle.com/datasets/ardikasatria/datasettanamanpadisumatera).
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
-
-### Variabel-variabel pada Heart Failure Prediction Dataset adalah sebagai berikut:
-- Age : merupakan umur pasien dalam satuan tahun.
-- Sex : merupakan jenis kelamin pasien meliputi [M: Male, F: Female].
-- dst
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+### Variabel-variabel pada Dataset adalah sebagai berikut:
+Provinsi: Nama provinsi (object)
+Tahun : Tahun produksi padi (integer)
+Produksi: Hasil produksi atau panen tahunan (ton) (float)
+Luas Panen: Luas Pertanian (hektar) (float)
+Curah hujan: Jumlah rata-rata curah hujan dalam setahun (milimeter) (float)
+Kelembaban: Tingkat kelembaban rata-rata dalam setahun (persentase) (float)
+Suhu Rata-Rata: Derajat suhu rata-rata dalam setahun (celsius) (float)
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+Dataset yang digunakan nyaris sesuai dengan kriteria dataset yang dapat di proses oleh algoritma yang dipakai maka dari itu hanya ada satu tahapan preparation yang dilakukan dalam pembuatan model ini yaitu penghapusan kolom Provinsi yang mana memiliki tipe data object dengan cara:
+```bash
+df = df.drop(['Provinsi','Tahun'], axis=1)
+```
 
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+1. Seleksi fitur dan label
+```bash
+features = ['Luas Panen', 'Curah hujan','Kelembapan', 'Suhu rata-rata']
+x = df[features]
+y = df['Produksi']
+x.shape, y.shape
+```
+3. Memisahkan data training dan testing
+```bash
+from sklearn.model_selection import train_test_split
+x_train, X_test, y_train, y_test = train_test_split(x,y,random_state=70)
+y_test.shape
+```
+4. Pembuatan model regresi linear
+```bash
+from sklearn.linear_model import LinearRegression
+lr = LinearRegression()
+lr.fit(x_train,y_train)
+pred = lr.predict(X_test)
+```
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
-
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
-
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Metrik evaluasi yang digunakan untuk mengevaluasi model yang dibuat adalah metrik akurasi:
+```bash
+score = lr.score(X_test, y_test)
+print('akurasi model regresi linier = ', score)
+```
+Dengan itu, akurasi yang didapatkan adalah 86.63623649914514% yang mana menunjukan jika model yang dibuat dapat dipakai karna memiliki akurasi yang cukup tinggi.
 
 ## Deployment
-pada bagian ini anda memberikan link project yang diupload melalui streamlit share. boleh ditambahkan screen shoot halaman webnya.
 
-**---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
-
+[Estimasi Hasil Panen Padi](https://estimasi-panen-alan.streamlit.app/)

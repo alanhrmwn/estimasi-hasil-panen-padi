@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 
-model = pickle.load(open('estimasi_padi.sav', 'rb'))
+model = pickle.load(open('estimasi-hasil-panen-padi.sav', 'rb'))
 
 st.title('Estimasi Hasil Panen Padi di Sumatera')
 
@@ -12,7 +12,7 @@ Suhu_rata_rata = st.number_input('Derajat suhu rata-rata dalam setahun (celsius)
 
 predict = ''
 
-if st.button('Estimasi Nilai'):
+if st.button('Estimasi Hasil Panen'):
     predict = model.predict(
         [[Luas_Panen, Curah_hujan, Kelembapan, Suhu_rata_rata]]
     )

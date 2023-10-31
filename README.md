@@ -47,10 +47,39 @@ Kelembaban: Tingkat kelembaban rata-rata dalam setahun (persentase) (float)
 Suhu Rata-Rata: Derajat suhu rata-rata dalam setahun (celsius) (float)
 
 ## Data Preparation
+Cek missing values dalam dataset
+```
+sns.heatmap(df.isnull())
+```
+
+![image](https://github.com/alanhrmwn/estimasi-hasil-panen-padi/assets/148874522/9e0426c0-f78a-4e0f-b646-ebde29b8ca2f)
+
 Dataset yang digunakan nyaris sesuai dengan kriteria dataset yang dapat di proses oleh algoritma yang dipakai maka dari itu hanya ada satu tahapan preparation yang dilakukan dalam pembuatan model ini yaitu penghapusan kolom Provinsi yang mana memiliki tipe data object dengan cara:
 ```bash
 df = df.drop(['Provinsi','Tahun'], axis=1)
 ```
+Cek korelasi antar kolom
+![image](https://github.com/alanhrmwn/estimasi-hasil-panen-padi/assets/148874522/a7b1c694-c13c-4fdc-ae2e-4103a34ac24f)
+
+Visualisasi hasil produksi padi per provinsi:
+```
+plt.figure(figsize=(15,8))
+sns.barplot(x='Provinsi', y='Produksi', data=df)
+plt.show()
+```
+
+![image](https://github.com/alanhrmwn/estimasi-hasil-panen-padi/assets/148874522/6fab14f2-d3b1-4598-852b-e57968614c68)
+
+Visualisasi hasil produksi padi per tahun:
+```
+plt.figure(figsize=(15,8))
+sns.barplot(x='Tahun',y='Produksi',data=df)
+plt.xticks(rotation=45)
+plt.show()
+```
+
+![image](https://github.com/alanhrmwn/estimasi-hasil-panen-padi/assets/148874522/0ebf1b93-a024-450f-addb-534d5a4ce37e)
+
 
 ## Modeling
 1. Seleksi fitur dan label
